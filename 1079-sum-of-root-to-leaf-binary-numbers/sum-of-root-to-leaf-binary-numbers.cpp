@@ -11,16 +11,22 @@
  */
 class Solution {
 public:
-   int solve(TreeNode* root, int sum) {
+   int solve(TreeNode* root, string &s) {
     if (!root) return 0;
-    sum = (sum << 1) +  root->val;
+    s.push_back(root->val + '0');
     if (!root->left && !root->right) {
-        return sum;
+        int v = stoi(s, nullptr, 2);
+        s.pop_back();
+        return v;
     }
-    return solve(root->left, sum) + solve(root->right, sum);
+    
+    int total = solve(root->left, s) + solve(root->right, s);
+    s.pop_back();
+    return total;
 }
-    int sumRootToLeaf(TreeNode* root) {
-        int ans=solve(root,0);
-        return ans;
-    }
+
+int sumRootToLeaf(TreeNode* root) {
+    string s = "";
+    return solve(root, s);
+}
 };
