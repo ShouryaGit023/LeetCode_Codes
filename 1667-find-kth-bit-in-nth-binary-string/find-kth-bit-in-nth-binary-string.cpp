@@ -13,9 +13,12 @@ public:
         return ans;
 
     }
-    string solve(string &s,int i,int &n){
+    string solve(string &s,int i,int &n,vector<string> &dp){
         if(i==n){
             return s;
+        }
+        if(dp[i]!="a"){
+            return dp[i];
         }
         string is=invert(s);
         reverse(is.begin(),is.end());
@@ -23,11 +26,12 @@ public:
         for(auto i:is){
             s+=i;
         }
-        return solve(s,i+1,n);
+        return dp[i]=solve(s,i+1,n,dp);
     }
     char findKthBit(int n, int k) {
         string s="0";
-        string ans=solve(s,1,n);
+        vector<string> dp(n+1,"a");
+        string ans=solve(s,1,n,dp);
         cout<<ans<<endl;
         return ans[k-1];
     }
