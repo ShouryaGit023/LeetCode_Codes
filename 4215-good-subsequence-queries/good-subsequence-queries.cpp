@@ -92,15 +92,13 @@ public:
                 
                 else{
                     for (int i = 0; i < n; ++i) {
-    long long leftGcd = st.query(0, i - 1);
-    long long rightGcd = st.query(i + 1, n - 1);
-    
-    // FIX: Check against 'p', not '1'
-    if (safe_gcd(leftGcd, rightGcd) == (long long)p) { 
-        vq++;
-        break; 
-    }
-}
+                        int leftGcd = st.query(0,i-1);
+                        int rightGcd = st.query(i+1,n-1);
+                        if (safe_gcd(leftGcd, rightGcd) == p) {
+                            vq++;
+                            break; 
+                        }
+                    }
                 }
                 
             }
