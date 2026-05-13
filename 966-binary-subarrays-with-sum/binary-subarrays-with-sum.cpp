@@ -1,22 +1,28 @@
 class Solution {
 public:
-    int numSubarraysWithSum(vector<int>& v, int s) {
-        int n=v.size();
-        vector<int> pre(n+1,0);
-        for(int i=0;i<n;i++){
-            pre[i+1]=pre[i]+v[i];
-        }
-        unordered_map<int,int> m;
-        m[pre[0]]++;
-        int ans=0;
-        for(int i=1;i<=n;i++){
-            int req=pre[i]-s;
-            if(m.find(req)!=m.end()){
-                ans+=m[req];
+    long long atMost(vector<int>& v, int goal) {
+        if (goal < 0) return 0;
+        long long count = 0;
+        int sum = 0;
+        int l = 0;
+        
+        for (int r = 0; r < v.size(); ++r) {
+            sum += v[r];
+            
+            // Shrink window if sum exceeds goal
+            while (sum > goal && l <= r) {
+                sum -= v[l];
+                l++;
             }
-            m[pre[i]]++;
+            
+            // All subarrays ending at r with start index between l and r 
+            // are valid. Total count = (r - l + 1)
+            count += (r - l + 1);
         }
-        return ans;
-
+        return count;
+    }
+    int numSubarraysWithSum(vector<int>& v, int s) {
+        return atMost(v,s)-atMost(v,s-1);
+        
     }
 };
