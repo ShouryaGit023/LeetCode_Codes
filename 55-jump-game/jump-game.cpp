@@ -9,7 +9,7 @@ public:
                 return true;
             }
         }
-        if(n==1)return true;
+        
         return mp>=n-1;
         
     }
