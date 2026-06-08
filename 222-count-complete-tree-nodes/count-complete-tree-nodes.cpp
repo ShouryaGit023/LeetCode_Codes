@@ -11,22 +11,27 @@
  */
 class Solution {
 public:
-    int ans=1;
-    void dfs(TreeNode* node){
-        if(!node)return;
-        if(node->left){
-            ans++;
-            dfs(node->left);
+    int cl(TreeNode* node){
+        int c=0;
+        while(node){
+            c++;
+            node=node->left;
         }
-        if(node->right){
-            ans++;
-            dfs(node->right);
+        return c;
+    }
+    int cr(TreeNode* node){
+        int c=0;
+        while(node){
+            c++;
+            node=node->right;
         }
-
+        return c;
     }
     int countNodes(TreeNode* root) {
         if(!root)return 0;
-        dfs(root);
-        return ans;
+        int lh=cl(root);
+        int rh=cr(root);
+        if(lh==rh)return (1<<lh)-1;
+        return 1+countNodes(root->left)+countNodes(root->right);
     }
 };
