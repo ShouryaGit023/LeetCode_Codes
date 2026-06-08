@@ -9,29 +9,16 @@
  */
 class Solution {
 public:
-    bool path(TreeNode* node, TreeNode* p ,vector<TreeNode* > &v){
-        if(!node)return false;
-        v.push_back(node);
-        if(node->val==p->val)return true;
-        if(path(node->left,p,v) || path(node->right,p,v))return true;
-
-        v.pop_back();
-        return false;
-    }
+    
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        vector<TreeNode *> pp,pq;
-        path(root,p,pp);
-        path(root,q,pq);
-        int n=min(pp.size(),pq.size());
-        TreeNode *ans=root;
-        for(int i=0;i<n;i++){
-            if(pp[i]==pq[i]){
-                ans=pq[i];
-                
-            }
-            else break;
-        }
-        return ans;
+    if(!root)return NULL;
+    if(root->val==p->val || root->val== q->val)return root;
+    TreeNode*l=lowestCommonAncestor(root->left,p,q);    
+    TreeNode* r=lowestCommonAncestor(root->right,p,q);  
+    if(l && r){
+        return root;
+    }  
+    return l ? l : r;
 
     }
 };
