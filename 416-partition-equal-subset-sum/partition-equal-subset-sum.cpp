@@ -1,22 +1,24 @@
 class Solution {
 public:
-    bool solve(int id,int s, vector<int> &v,vector<vector<int>> &dp){
-        if(s==0)return 1;
-        if(id==0)return (v[id]==s);
-        if(dp[id][s]!=-1)return dp[id][s];
-        bool nt=solve(id-1,s,v,dp);
-        bool t=false;
-        if(s>=v[id]){
-            t=solve(id-1,s-v[id],v,dp);
-        }
-        return dp[id][s]=(nt|| t);
-    }
     bool canPartition(vector<int>& v) {
         int n=v.size();
-        int s=0;
-        for(auto i:v)s+=i;
-        if(s&1)return false;
-        vector<vector<int>> dp(n,vector<int>(s/2+1,-1));
-        return solve(n-1,s/2,v,dp);
+        int sum=0;
+        for(auto i:v)sum+=i;
+        if(sum & 1)return false;
+        sum/=2;
+        vector<vector<bool>> dp(n+1,vector<bool>(sum+1,false));
+        for(int i=0;i<=n;i++)dp[i][0]=true;
+        
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=sum;j++){
+               if(v[i-1]>j){
+                dp[i][j]=dp[i-1][j];
+               }
+               else{
+                dp[i][j]=(dp[i-1][j] || dp[i-1][j-v[i-1]]);
+               }
+            }
+        }
+        return dp[n][sum];
     }
 };
