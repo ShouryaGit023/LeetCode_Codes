@@ -6,13 +6,22 @@ public:
    bool check(string& prev, string& curr) {
     if (curr.size() != prev.size() + 1) return false;
     int i = 0, j = 0;
-    while (j < curr.size()) {
-        if (i < prev.size() && prev[i] == curr[j]) {
+    int c=0;
+
+    while(i<prev.size() && j<curr.size()){
+        if(prev[i]==curr[j]){
             i++;
+            j++;
         }
-        j++;
+        else{
+            if(c!=0)return false;
+            else{
+                c++;
+                j++;
+            }
+        }
     }
-    return i == prev.size();
+        return true;
 }
     int longestStrChain(vector<string>& v) {
         int n=v.size();
