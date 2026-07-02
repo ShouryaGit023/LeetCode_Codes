@@ -3,7 +3,7 @@ public:
     int findKthPositive(vector<int>& v, int k) {
         int n=v.size();
         int l=1;
-        int r=2000;
+        int r=1e9;
         int ans=r;
         while(l<=r){
             int m=l+(r-l)/2;
