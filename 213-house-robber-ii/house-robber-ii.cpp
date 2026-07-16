@@ -3,6 +3,9 @@ public:
     int dp[101][101];
     int rob(vector<int>& v) {
         int n=v.size();
+        //state dp[i][0]-> max profit if ith taken and 0th is already taken
+        //state dp[i][1]-> max profit if ith taken and 1th is already taken
+
         memset(dp,0,sizeof(dp));
         if(n==1)return v[0];
         dp[0][0]=v[0];
