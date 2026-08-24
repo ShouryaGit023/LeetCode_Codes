@@ -25,7 +25,7 @@ public:
             for (int i = 31; i >= 0; i--) {
                 int d = (n >> i) & 1;
                 if (curr->bit[1 - d]) {
-                    ans |= (1 << i);
+                    ans += (1 << i);
                     curr = curr->bit[1 - d];
                 } else {
                     curr = curr->bit[d];
