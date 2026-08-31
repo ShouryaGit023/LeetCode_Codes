@@ -8,9 +8,7 @@ public:
         int mf=0;
         for(int r=0;r<n;r++){
             m[v[r]]++;
-            for(auto i:m){
-                mf=max(i.second,mf);
-            }
+            mf=max(mf,m[v[r]]);
             while((r-l+1)-mf > k){
                 m[v[l]]--;
                 mf=0;
