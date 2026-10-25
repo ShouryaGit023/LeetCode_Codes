@@ -16,7 +16,7 @@ public:
         queue<TreeNode* > q;
         if(!root)return {};
         q.push(root);
-        deque<vector<int>> ans;
+        vector<vector<int>> ans;
         while(!q.empty()){
             int n=q.size();
             vector<int> t;
@@ -27,9 +27,9 @@ public:
                 if(i->left)q.push(i->left);
                 if(i->right)q.push(i->right);
             }
-            ans.push_front(t);
+            ans.push_back(t);
         }
-        vector<vector<int>> aa(ans.begin(),ans.end());
-        return aa;
+       reverse(ans.begin(),ans.end());
+       return ans;
     }
 };
