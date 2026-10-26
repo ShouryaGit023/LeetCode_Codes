@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    map<int,int> m;
+    unordered_map<int,int> m;
     int dfs(TreeNode* root){
         if(!root)return 0;
         auto l=dfs(root->left);
