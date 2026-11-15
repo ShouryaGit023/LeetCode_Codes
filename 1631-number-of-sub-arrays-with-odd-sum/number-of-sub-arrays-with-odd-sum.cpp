@@ -1,15 +1,14 @@
 class Solution {
 public:
     int numOfSubarrays(vector<int>& v) {
-        int n=v.size();
-        int e=1;
         int o=0;
+        const int mod=1e9+7;
+        int e=1;
         int ans=0;
-        int ps=0;
-        const int MOD=1e9+7;
-        for(int i=0;i<n;i++){
-            ps+=v[i];
-            if(ps&1){
+        int pr=0;
+        for(auto i:v){
+            pr+=i;
+            if(pr&1){
                 ans+=e;
                 o++;
             }
@@ -17,8 +16,9 @@ public:
                 ans+=o;
                 e++;
             }
-            ans%=MOD;
+            ans%=(mod);
         }
         return ans;
+        
     }
 };
